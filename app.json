@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "StatsJos",
+    "slug": "statsjos",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/Statsjos.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/Statsjos.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIViewControllerBasedStatusBarAppearance": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/Statsjos.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.difference.StatsJos"
+    },
+    "web": {
+      "favicon": "./assets/Statsjos.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b2494dd7-1f5e-4903-9ce2-32527856e706"
+      }
+    },
+    "owner": "difference",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#3668B7"
+    },
+    "iosStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#3668B7"
+    }
+  }
+}
