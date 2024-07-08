@@ -33,14 +33,10 @@ const SideBarItems = ({ icon, text, lock, routeName, navigation }) => {
   });
 
   const [isPressed, setIsPressed] = useState(false);
-  const { state, dispatch } = useDataStore();
+  const { state } = useDataStore();
   const { isLoggedIn } = state;
 
   const logout = () => {
-    dispatch({
-      type: "LOGOUT_USER",
-      payload: true,
-    });
     navigation.navigate("login");
   };
 
@@ -59,7 +55,7 @@ const SideBarItems = ({ icon, text, lock, routeName, navigation }) => {
       onPress={() => {
         isLoggedIn
           ? navigation.navigate(routeName)
-          : routeName === "home" || routeName === "ExamPreset"
+          : routeName === "home"
           ? navigation.navigate(routeName)
           : logout();
       }}

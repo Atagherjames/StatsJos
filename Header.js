@@ -60,6 +60,7 @@ const Header = ({ navigation }) => {
                     logout();
                   }}
                 >
+                  <Text>sssssssssss</Text>
                   <Text>
                     Sign Out <Icon name="sign-out" size={18} color="grey" />
                   </Text>

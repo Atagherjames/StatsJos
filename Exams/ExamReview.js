@@ -99,54 +99,52 @@ const ExamReview = ({ navigation }) => {
   ];
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <Text style={styles.summaryTitle}>Summary</Text>
-        <View style={styles.chartContainer}>
-          <View style={styles.chartWrapper}>
-            <ProgressChart
-              data={data}
-              width={screenWidth - 32}
-              height={220}
-              strokeWidth={25}
-              radius={32}
-              chartConfig={chartConfig}
-              hideLegend={false}
-            />
-          </View>
+    <ScrollView style={styles.container}>
+      <Text style={styles.summaryTitle}>Summary</Text>
+      <View style={styles.chartContainer}>
+        <View style={styles.chartWrapper}>
+          <ProgressChart
+            data={data}
+            width={screenWidth - 32}
+            height={220}
+            strokeWidth={25}
+            radius={32}
+            chartConfig={chartConfig}
+            hideLegend={false}
+          />
         </View>
+      </View>
 
-        {/* Table */}
-        <Text style={styles.DetailsTitle}>Detail</Text>
-        <View>
-          <Table borderStyle={styles.boderStyle}>
-            <Row
-              data={tableHead}
-              style={styles.head}
-              textStyle={styles.headText}
-            />
-            <TableWrapper>
-              <Rows data={tableData} textStyle={styles.bodyText} />
-            </TableWrapper>
-          </Table>
-          <View style={styles.btnContainer}>
-            <Button
-              mode="contained"
-              onPress={() => {
-                dispatch({
-                  type: "CBT_REVIEW_MODE",
-                  payload: true,
-                });
-                navigation.navigate("Exam");
-              }}
-              style={styles.correctionBtn}
-            >
-              CORRECTIONS
-            </Button>
-          </View>
+      {/* Table */}
+      <Text style={styles.DetailsTitle}>Detail</Text>
+      <View>
+        <Table borderStyle={styles.boderStyle}>
+          <Row
+            data={tableHead}
+            style={styles.head}
+            textStyle={styles.headText}
+          />
+          <TableWrapper>
+            <Rows data={tableData} textStyle={styles.bodyText} />
+          </TableWrapper>
+        </Table>
+        <View style={styles.btnContainer}>
+          <Button
+            mode="contained"
+            onPress={() => {
+              dispatch({
+                type: "CBT_REVIEW_MODE",
+                payload: true,
+              });
+              navigation.navigate("Exam");
+            }}
+            style={styles.correctionBtn}
+          >
+            CORRECTIONS
+          </Button>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 

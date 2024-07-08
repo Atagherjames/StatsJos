@@ -1,9 +1,3 @@
-import { localstorageRemoveItem } from "../UtilityFunction/localStorage";
-
-const removeItem = async (key) => {
-  await localstorageRemoveItem(key);
-};
-
 export const reducer = (state, action) => {
   switch (action.type) {
     // CBT EXAMS
@@ -58,13 +52,7 @@ export const reducer = (state, action) => {
       return { ...state, isLoggedIn: true, token: action.payload };
       break;
 
-    case "LOAD_USER":
-      return { ...state, currentUser: action.payload };
-      break;
-
     case "LOGOUT_USER":
-      removeItem("token");
-      removeItem("authentication");
       return { ...state, isLoggedIn: false, token: null, currentUser: {} };
       break;
 

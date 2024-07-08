@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(255,255,255)",
-    position: "relative",
     padding: 20,
   },
 
@@ -12,13 +11,17 @@ const styles = StyleSheet.create({
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
+    height: 200,
     alignSelf: "center",
   },
 
+  welcomeMessage: {
+    marginTop: -40,
+  },
+
   image: {
-    width: 400,
-    height: 400,
+    width: 200,
+    height: 200,
   },
 
   loginContainer: {
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   welcomeText: {
-    fontSize: 30,
+    fontSize: 25,
   },
 
   inputContainer: {

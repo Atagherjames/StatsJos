@@ -4,30 +4,9 @@ import styles from "./appStyle";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useDataStore } from "./DataStore/DataStore";
 import SideBarItems from "./SideItem";
-import { localstorageGetitem } from "./UtilityFunction/localStorage";
-
 export default function SideBar({ navigation }) {
   const { state } = useDataStore();
-  const { isLoggedIn } = state;
-  const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const authentication = await localstorageGetitem("authentication");
-        const user = await JSON.parse(authentication);
-        if (user) {
-          setCurrentUser(user);
-        } else {
-          setCurrentUser({});
-        }
-      } catch (error) {
-        console.error("Error getting user from local storage:", error);
-      }
-    }
-
-    getUser();
-  }, []);
+  const { isLoggedIn, currentUser } = state;
 
   return (
     <ScrollView style={styles.sideBar}>

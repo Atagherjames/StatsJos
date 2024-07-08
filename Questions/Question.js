@@ -9,46 +9,44 @@ const Question = () => {
   const [focusedInput, setFocusedInput] = useState(null);
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <Text variant="bodyMedium" style={styles.questionTextOne}>
-              Hi, Jossite
-            </Text>
+    <View style={styles.container}>
+      <Card style={styles.card}>
+        <Card.Content>
+          <Text variant="bodyMedium" style={styles.questionTextOne}>
+            Hi, Jossite
+          </Text>
 
-            <Text variant="bodyMedium" style={styles.questionTextTwo}>
-              How can we help you today?
-            </Text>
+          <Text variant="bodyMedium" style={styles.questionTextTwo}>
+            How can we help you today?
+          </Text>
 
-            <View style={styles.questionInput}>
-              <TextInput
-                mode="outlined"
-                label="Ask Your Question"
-                placeholder="Ask Your Question"
-                keyboardType="default"
-                value={question}
-                onChangeText={setQuestion}
-                onFocus={() => setFocusedInput("question")}
-                onBlur={() => setFocusedInput(null)}
-                right={
-                  <TextInput.Icon
-                    icon="chat"
-                    color={focusedInput === "question" ? "#4382DF" : "grey"}
-                  />
-                }
-                outlineColor="grey"
-                activeOutlineColor="#4382DF"
-              />
+          <View style={styles.questionInput}>
+            <TextInput
+              mode="outlined"
+              label="Ask Your Question"
+              placeholder="Ask Your Question"
+              keyboardType="default"
+              value={question}
+              onChangeText={setQuestion}
+              onFocus={() => setFocusedInput("question")}
+              onBlur={() => setFocusedInput(null)}
+              right={
+                <TextInput.Icon
+                  icon="chat"
+                  color={focusedInput === "question" ? "#4382DF" : "grey"}
+                />
+              }
+              outlineColor="grey"
+              activeOutlineColor="#4382DF"
+            />
 
-              <TouchableOpacity style={styles.btn}>
-                <Text style={{ color: "white" }}>SUBMIT</Text>
-              </TouchableOpacity>
-            </View>
-          </Card.Content>
-        </Card>
-      </View>
-    </SafeAreaView>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={{ color: "white" }}>SUBMIT</Text>
+            </TouchableOpacity>
+          </View>
+        </Card.Content>
+      </Card>
+    </View>
   );
 };
 

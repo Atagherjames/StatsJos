@@ -29,108 +29,106 @@ const PastQuestion = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <View>
-          {/* CBT metadata */}
-          <Text style={styles.cbtMetaData}>
-            <Text style={styles.text}>
-              ANATOMY: {currentIndex + 1}/{examData.length}
-            </Text>
+    <ScrollView style={styles.container}>
+      <View>
+        {/* CBT metadata */}
+        <Text style={styles.cbtMetaData}>
+          <Text style={styles.text}>
+            ANATOMY: {currentIndex + 1}/{examData.length}
           </Text>
-          <Divider />
+        </Text>
+        <Divider />
 
-          {/* question */}
-          <View style={styles.questionContainer}>
+        {/* question */}
+        <View style={styles.questionContainer}>
+          <Card style={styles.card}>
+            <Card.Content>
+              <Text variant="bodyMedium" style={styles.questionText}>
+                {examData[currentIndex].question}
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
+
+        {/* options */}
+        <View style={styles.optionsContainer}>
+          <Card style={styles.card}>
+            <Card.Content>
+              {examData[currentIndex].options.map((option) => (
+                <Card
+                  style={[
+                    styles.card,
+                    option.key === "A" && styles.firstOfType,
+                    showAnswer &&
+                      option.key === showAnswerFunc() &&
+                      styles.answer,
+                  ]}
+                  key={option.key}
+                >
+                  <Card.Content>
+                    <Text
+                      variant="bodyMedium"
+                      style={[styles.cardBodyContainer]}
+                    >
+                      <Text style={[styles.button]}>{option.key}</Text>
+                      <Text
+                        style={
+                          showAnswer &&
+                          option.key === showAnswerFunc() &&
+                          styles.answerText
+                        }
+                      >
+                        {option.text}
+                      </Text>
+                    </Text>
+                  </Card.Content>
+                </Card>
+              ))}
+            </Card.Content>
+          </Card>
+        </View>
+
+        {/* explanation */}
+        <View style={styles.explanationContainer}>
+          {showAnswer && examData[currentIndex].explanation && (
             <Card style={styles.card}>
               <Card.Content>
-                <Text variant="bodyMedium" style={styles.questionText}>
-                  {examData[currentIndex].question}
+                <Text variant="bodyMedium" style={styles.explanationText}>
+                  {examData[currentIndex].explanation}
                 </Text>
               </Card.Content>
             </Card>
-          </View>
-
-          {/* options */}
-          <View style={styles.optionsContainer}>
-            <Card style={styles.card}>
-              <Card.Content>
-                {examData[currentIndex].options.map((option) => (
-                  <Card
-                    style={[
-                      styles.card,
-                      option.key === "A" && styles.firstOfType,
-                      showAnswer &&
-                        option.key === showAnswerFunc() &&
-                        styles.answer,
-                    ]}
-                    key={option.key}
-                  >
-                    <Card.Content>
-                      <Text
-                        variant="bodyMedium"
-                        style={[styles.cardBodyContainer]}
-                      >
-                        <Text style={[styles.button]}>{option.key}</Text>
-                        <Text
-                          style={
-                            showAnswer &&
-                            option.key === showAnswerFunc() &&
-                            styles.answerText
-                          }
-                        >
-                          {option.text}
-                        </Text>
-                      </Text>
-                    </Card.Content>
-                  </Card>
-                ))}
-              </Card.Content>
-            </Card>
-          </View>
-
-          {/* explanation */}
-          <View style={styles.explanationContainer}>
-            {showAnswer && examData[currentIndex].explanation && (
-              <Card style={styles.card}>
-                <Card.Content>
-                  <Text variant="bodyMedium" style={styles.explanationText}>
-                    {examData[currentIndex].explanation}
-                  </Text>
-                </Card.Content>
-              </Card>
-            )}
-          </View>
-
-          <View style={styles.navigationContainer}>
-            <Button mode="contained" onPress={prevButton} style={styles.navBtn}>
-              PREVIOUS
-            </Button>
-            <Button mode="contained" onPress={nextButton} style={styles.navBtn}>
-              NEXT
-            </Button>
-          </View>
-
-          {!showAnswer ? (
-            <Button
-              mode="contained"
-              onPress={() => setShowAnswer(true)}
-              style={styles.showAnswer}
-            >
-              SHOW ANSWER
-            </Button>
-          ) : (
-            <Button
-              mode="contained"
-              onPress={() => setShowAnswer(false)}
-              style={styles.showAnswer}
-            >
-              HIDE ANSWER
-            </Button>
           )}
         </View>
-      </ScrollView>
-    </SafeAreaView>
+
+        <View style={styles.navigationContainer}>
+          <Button mode="contained" onPress={prevButton} style={styles.navBtn}>
+            PREVIOUS
+          </Button>
+          <Button mode="contained" onPress={nextButton} style={styles.navBtn}>
+            NEXT
+          </Button>
+        </View>
+
+        {!showAnswer ? (
+          <Button
+            mode="contained"
+            onPress={() => setShowAnswer(true)}
+            style={styles.showAnswer}
+          >
+            SHOW ANSWER
+          </Button>
+        ) : (
+          <Button
+            mode="contained"
+            onPress={() => setShowAnswer(false)}
+            style={styles.showAnswer}
+          >
+            HIDE ANSWER
+          </Button>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 

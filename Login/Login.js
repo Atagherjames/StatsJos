@@ -48,13 +48,14 @@ const Login = ({ navigation }) => {
     const getProfile = async () => {
       try {
         const user = await getAuthStatus();
+        console.log(user);
         if (user) {
           dispatch({
             type: "LOAD_USER",
             payload: JSON.parse(user),
           });
         } else {
-          this.logout();
+          logout();
         }
       } catch (error) {
         logout();
@@ -78,7 +79,7 @@ const Login = ({ navigation }) => {
             JSON.stringify({ email: "admin@gmail.com" })
           );
 
-          localstorageSetitem("token", "login_token");
+          localstorageSetitem("token", "token");
 
           dispatch({
             type: "LOGIN_USER",
@@ -91,10 +92,9 @@ const Login = ({ navigation }) => {
     };
 
     const getAuthStatus = () => {
-      return new Promise(async (res, rej) => {
+      return new Promise((res, rej) => {
         try {
           let authentication = localstorageGetitem("authentication");
-
           if (authentication) {
             return res(authentication);
           }
@@ -112,86 +112,84 @@ const Login = ({ navigation }) => {
   }, [login]);
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <View style={styles.imgContainer}>
-          <Image
-            style={styles.image}
-            source={require("../assets/Statsjos.png")}
-          />
+    <View style={styles.container}>
+      <View style={styles.imgContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/Statsjos.png")}
+        />
 
-          <View style={styles.welcomeMessage}>
-            <Text style={styles.welcomeText}>Welcome!</Text>
-            <Text style={styles.welcomeText}>
-              to <Text style={styles.text2}>StatsJos</Text>
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.loginContainer}>
-          <View style={styles.inputContainer}>
-            <TextInput
-              mode="outlined"
-              label="Email"
-              placeholder="Email"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
-              outlineColor="grey"
-              activeOutlineColor="#4382DF"
-              onFocus={() => setFocusedInput("email")}
-              onBlur={() => setFocusedInput(null)}
-              right={
-                <TextInput.Icon
-                  icon="email"
-                  color={focusedInput === "email" ? "#4382DF" : "grey"}
-                />
-              }
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              mode="outlined"
-              label="Password"
-              placeholder="Password"
-              secureTextEntry={!passwordVisible}
-              value={password}
-              onChangeText={setPassword}
-              onFocus={() => setFocusedInput("password")}
-              onBlur={() => setFocusedInput(null)}
-              right={
-                <TextInput.Icon
-                  icon={passwordVisible ? "eye" : "eye-off"}
-                  onPress={() => setPasswordVisible(!passwordVisible)}
-                  color={focusedInput === "password" ? "#4382DF" : "grey"}
-                />
-              }
-              outlineColor="grey"
-              activeOutlineColor="#4382DF"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TouchableOpacity style={styles.btn} onPress={() => setLogin(true)}>
-              <Text style={styles.text1}>Login</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.forgotPassword}>
-            <Text style={styles.text2}>I Forgot my Password</Text>
-          </View>
-
-          <View style={styles.signUp}>
-            <Text style={styles.inputText}>
-              Don't have a StatsJos Account Yet?
-            </Text>
-
-            <Text style={styles.text2}>Click here to get one</Text>
-          </View>
+        <View style={styles.welcomeMessage}>
+          <Text style={styles.welcomeText}>Welcome!</Text>
+          <Text style={styles.welcomeText}>
+            to <Text style={styles.text2}>StatsJos</Text>
+          </Text>
         </View>
       </View>
-    </SafeAreaView>
+
+      <View style={styles.loginContainer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            mode="outlined"
+            label="Email"
+            placeholder="Email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+            outlineColor="grey"
+            activeOutlineColor="#4382DF"
+            onFocus={() => setFocusedInput("email")}
+            onBlur={() => setFocusedInput(null)}
+            right={
+              <TextInput.Icon
+                icon="email"
+                color={focusedInput === "email" ? "#4382DF" : "grey"}
+              />
+            }
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            mode="outlined"
+            label="Password"
+            placeholder="Password"
+            secureTextEntry={!passwordVisible}
+            value={password}
+            onChangeText={setPassword}
+            onFocus={() => setFocusedInput("password")}
+            onBlur={() => setFocusedInput(null)}
+            right={
+              <TextInput.Icon
+                icon={passwordVisible ? "eye" : "eye-off"}
+                onPress={() => setPasswordVisible(!passwordVisible)}
+                color={focusedInput === "password" ? "#4382DF" : "grey"}
+              />
+            }
+            outlineColor="grey"
+            activeOutlineColor="#4382DF"
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TouchableOpacity style={styles.btn} onPress={() => setLogin(true)}>
+            <Text style={styles.text1}>Login</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.forgotPassword}>
+          <Text style={styles.text2}>I Forgot my Password</Text>
+        </View>
+
+        <View style={styles.signUp}>
+          <Text style={styles.inputText}>
+            Don't have a StatsJos Account Yet?
+          </Text>
+
+          <Text style={styles.text2}>Click here to get one</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 

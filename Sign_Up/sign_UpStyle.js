@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   imgContainer: {
     display: "flex",
     width: "95%",
+    height: 200,
     marginLeft: "auto",
     marginRight: "auto",
     alignItems: "center",
@@ -19,15 +20,15 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 400,
-    height: 400,
+    width: 200,
+    height: 200,
   },
 
   signupContainer: {
     width: "95%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 20,
+    marginTop: -40,
   },
 
   inputContainer: {

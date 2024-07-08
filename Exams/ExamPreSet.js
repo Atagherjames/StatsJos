@@ -4,8 +4,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import DropDown from "react-native-paper-dropdown";
 import { useDataStore } from "../DataStore/DataStore";
 import styles from "./examPreSetStyle";
-import { SafeAreaView } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 
 const ExamPreSet = ({ navigation }) => {
   const { state, dispatch } = useDataStore();
@@ -62,8 +60,8 @@ const ExamPreSet = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
+    <ScrollView>
+      <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image style={styles.image} source={require("../assets/exam.png")} />
         </View>
@@ -159,8 +157,8 @@ const ExamPreSet = ({ navigation }) => {
             </View>
           </View>
         </Modal>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 

@@ -9,12 +9,7 @@ export const initialState = {
   cbtSelectedCourse: "",
   reviewMode: false,
 
-  // Login & Authentication
-  // isLoggedIn: !!localstorageGetitem("token"),
-  // token: localstorageGetitem("token"),
-  // currentUser: {},
-
   isLoggedIn: false,
-  token: localstorageGetitem("token"),
+  token: null,
   currentUser: {},
 };

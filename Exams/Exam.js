@@ -127,141 +127,135 @@ const Exam = ({ navigation }) => {
   const [checked, setChecked] = useState(null);
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <View>
-          {/* CBT metadata */}
-          <View style={styles.cbtMetaData}>
-            <Text style={styles.text}>
-              ANATOMY: {currentIndex + 1}/{examData.length}
-            </Text>
-            <View style={styles.timerContainer}>
-              <Text style={styles.text}>{formatTime()}</Text>
-              <IconButton icon="clock-outline" size={25} />
-            </View>
-          </View>
-          <Divider />
-
-          <View style={styles.questionContainer}>
-            <Card>
-              <Card.Content>
-                <Text variant="bodyMedium">
-                  {examData[currentIndex].question}
-                </Text>
-              </Card.Content>
-            </Card>
-          </View>
-
-          <View style={styles.optionsContainer}>
-            <Card>
-              <Card.Content>
-                <RadioButton.Group
-                  onValueChange={(value) => {
-                    if (!reviewMode) {
-                      setChecked(value);
-                      selectedAnswerFunc(value);
-                    }
-                  }}
-                  value={checked}
-                >
-                  {examData[currentIndex].options.map((option) => {
-                    const correctAnswer = examData[currentIndex].answer.key;
-                    const isSelected =
-                      selectedAnswers[examData[currentIndex].id] === option.key;
-                    const isCorrect = correctAnswer === option.key;
-
-                    return (
-                      <View key={option.key} style={styles.radioButtonItem}>
-                        <RadioButton
-                          value={option.key}
-                          color="#4382DF"
-                          disabled={reviewMode}
-                        />
-                        <Text>
-                          {option.key}) {option.text}{" "}
-                          {reviewMode && (
-                            <>
-                              {isSelected && (
-                                <Text
-                                  style={{ color: isCorrect ? "green" : "red" }}
-                                >
-                                  {isCorrect ? "✓" : "✗"}
-                                </Text>
-                              )}
-                              {!isSelected && isCorrect && (
-                                <Text style={{ color: "green" }}>✓</Text>
-                              )}
-                            </>
-                          )}
-                        </Text>
-                      </View>
-                    );
-                  })}
-                </RadioButton.Group>
-              </Card.Content>
-            </Card>
-          </View>
-
-          <View style={styles.navigationContainer}>
-            <Button mode="contained" onPress={prevButton} style={styles.navBtn}>
-              PREVIOUS
-            </Button>
-
-            {currentIndex === examData.length - 1 ? (
-              <Button
-                mode="contained"
-                onPress={
-                  reviewMode
-                    ? () => navigation.navigate("ExamReview")
-                    : submitButton
-                }
-                style={styles.navBtn}
-              >
-                {reviewMode ? "BACK" : "SUBMIT"}
-              </Button>
-            ) : (
-              <Button
-                mode="contained"
-                onPress={nextButton}
-                style={styles.navBtn}
-              >
-                NEXT
-              </Button>
-            )}
-          </View>
-
-          <View style={styles.questionListContainer}>
-            {examData.map((question, index) => {
-              const currentQuestionId = question.id;
-              const isActive = currentIndex == index;
-              const isSelected = !!selectedAnswers[currentQuestionId];
-
-              return (
-                <TouchableOpacity
-                  style={[
-                    styles.btn,
-                    isActive && styles.btnActive,
-                    isSelected && styles.btnSelected,
-                  ]}
-                  key={question.id}
-                  onPress={() => setIndex(index)}
-                >
-                  <Text
-                    style={[
-                      styles.btnText,
-                      isActive && styles.activeBtnText,
-                      isSelected && styles.selectedBtnText,
-                    ]}
-                  >
-                    {index + 1}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
+    <ScrollView style={styles.container}>
+      <View>
+        {/* CBT metadata */}
+        <View style={styles.cbtMetaData}>
+          <Text style={styles.text}>
+            ANATOMY: {currentIndex + 1}/{examData.length}
+          </Text>
+          <View style={styles.timerContainer}>
+            <Text style={styles.text}>{formatTime()}</Text>
+            <IconButton icon="clock-outline" size={25} />
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <Divider />
+
+        <View style={styles.questionContainer}>
+          <Card>
+            <Card.Content>
+              <Text variant="bodyMedium">
+                {examData[currentIndex].question}
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
+
+        <View style={styles.optionsContainer}>
+          <Card>
+            <Card.Content>
+              <RadioButton.Group
+                onValueChange={(value) => {
+                  if (!reviewMode) {
+                    setChecked(value);
+                    selectedAnswerFunc(value);
+                  }
+                }}
+                value={checked}
+              >
+                {examData[currentIndex].options.map((option) => {
+                  const correctAnswer = examData[currentIndex].answer.key;
+                  const isSelected =
+                    selectedAnswers[examData[currentIndex].id] === option.key;
+                  const isCorrect = correctAnswer === option.key;
+
+                  return (
+                    <View key={option.key} style={styles.radioButtonItem}>
+                      <RadioButton
+                        value={option.key}
+                        color="#4382DF"
+                        disabled={reviewMode}
+                      />
+                      <Text>
+                        {option.key}) {option.text}{" "}
+                        {reviewMode && (
+                          <>
+                            {isSelected && (
+                              <Text
+                                style={{ color: isCorrect ? "green" : "red" }}
+                              >
+                                {isCorrect ? "✓" : "✗"}
+                              </Text>
+                            )}
+                            {!isSelected && isCorrect && (
+                              <Text style={{ color: "green" }}>✓</Text>
+                            )}
+                          </>
+                        )}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </RadioButton.Group>
+            </Card.Content>
+          </Card>
+        </View>
+
+        <View style={styles.navigationContainer}>
+          <Button mode="contained" onPress={prevButton} style={styles.navBtn}>
+            PREVIOUS
+          </Button>
+
+          {currentIndex === examData.length - 1 ? (
+            <Button
+              mode="contained"
+              onPress={
+                reviewMode
+                  ? () => navigation.navigate("ExamReview")
+                  : submitButton
+              }
+              style={styles.navBtn}
+            >
+              {reviewMode ? "BACK" : "SUBMIT"}
+            </Button>
+          ) : (
+            <Button mode="contained" onPress={nextButton} style={styles.navBtn}>
+              NEXT
+            </Button>
+          )}
+        </View>
+
+        <View style={styles.questionListContainer}>
+          {examData.map((question, index) => {
+            const currentQuestionId = question.id;
+            const isActive = currentIndex == index;
+            const isSelected = !!selectedAnswers[currentQuestionId];
+
+            return (
+              <TouchableOpacity
+                style={[
+                  styles.btn,
+                  isActive && styles.btnActive,
+                  isSelected && styles.btnSelected,
+                ]}
+                key={question.id}
+                onPress={() => setIndex(index)}
+              >
+                <Text
+                  style={[
+                    styles.btnText,
+                    isActive && styles.activeBtnText,
+                    isSelected && styles.selectedBtnText,
+                  ]}
+                >
+                  {index + 1}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
