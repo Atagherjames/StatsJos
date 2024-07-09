@@ -1,4 +1,4 @@
-import { localstorageGetitem } from "../UtilityFunction/localStorage";
+import { localstorageGetitem } from "../UtilityFunction/sensitiveInfo";
 export const initialState = {
   // cbt exam state initials
   cbtSelectedAnswers: {},

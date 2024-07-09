@@ -1,18 +1,13 @@
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useState, useEffect } from "react";
 import Toast from "react-native-toast-message";
 import { useDataStore } from "../DataStore/DataStore";
 import {
-  localstorageSetitem,
-  localstorageGetitem,
-} from "../UtilityFunction/localStorage";
+  setSensitiveInfo,
+  getSensitiveInfo,
+  deleteSensitiveInfo,
+} from "../UtilityFunction/sensitiveInfo";
 
 import styles from "./loginStyle";
 
@@ -71,15 +66,13 @@ const Login = ({ navigation }) => {
       navigation.navigate("login");
     };
 
-    const authLogin = (email, password) => {
+    const authLogin = async (email, password) => {
       return new Promise(async (res, rej) => {
         if (email === "admin@gmail.com" && password === "admin") {
-          localstorageSetitem(
-            "authentication",
-            JSON.stringify({ email: "admin@gmail.com" })
-          );
-
-          localstorageSetitem("token", "token");
+          await setSensitiveInfo("authentication", {
+            email: "admin@gmail.com",
+          });
+          await setSensitiveInfo("token", "token");
 
           dispatch({
             type: "LOGIN_USER",
@@ -91,10 +84,15 @@ const Login = ({ navigation }) => {
       });
     };
 
-    const getAuthStatus = () => {
+    const getAuthStatus = async () => {
       return new Promise((res, rej) => {
         try {
-          let authentication = localstorageGetitem("authentication");
+          const getAuthentication = async () => {
+            const authentication = await getSensitiveInfo("authentication");
+            return authentication;
+          };
+          let authentication = getAuthentication();
+          console.log(authentication);
           if (authentication) {
             return res(authentication);
           }
